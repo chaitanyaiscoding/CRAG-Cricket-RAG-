@@ -32,8 +32,13 @@ class VectorStore:
         scores, indices = self.index.search(query_vector, top_k)
 
         results = []
-        for idx in indices[0]:
+        for score, idx in zip(scores[0], indices[0]):
+            print("Chunk at idx:", idx, "->", self.chunks[idx])
             if idx < len(self.chunks):
-                results.append(self.chunks[idx])
+                results.append({
+                    "score": float(score),
+                    "content": self.chunks[idx]["content"],
+                    "metadata": self.chunks[idx]["metadata"]
+                })
 
         return results

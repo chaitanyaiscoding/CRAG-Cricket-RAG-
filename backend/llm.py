@@ -4,6 +4,7 @@ OLLAMA_URL = "http://localhost:11434/api/generate"
 
 
 def generate_response(prompt):
+    print("[DEBUG] generate_response input prompt:", prompt)
     payload = {
         "model": "llama3",
         "prompt": prompt,
